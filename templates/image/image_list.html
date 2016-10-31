@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Hello</h1>
+    {% for image in object_list %}
+    <div class="">
+
+        <img src="{{ MEDIA_URL}}{{ image.image_url }}" alt="Picture of {{ image.title }}" />
+
+    </div>
+      <blockquote class="">
+          <b class='title'>{{ image.title }}</b>
+          <blockquote class="">
+              {{ image.description }}
+          </blockquote>
+      </blockquote>
+      {% if request.user == image.user %}
+        <a href="{% url 'image_update_view' image.id %}">Update</a>
+      {% endif %}
+      <hr>
+    {% endfor %}
+
+
+{% endblock %}
