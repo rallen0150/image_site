@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    {% if request.user == object.user %}
+      <a href="{% url 'category_Update_view' object.id %}">Update Category</a> |
+    {% endif %}
+      <a href="{% url 'image_create_view' %}">Upload Image</a>
+      <h2 class="title">{{ object.title }}</h2>
+  {% endif %}
+
+  <div class="row">
+    {% for image in object.get_recent %}
+    <div class="col-md-4">
+      <div class="">
+        <a href="{% url 'image_detail_view' image.id %}" data-toggle="tooltip" data-placement="right" title="{{ image.title}}, {{ image.description }}">
+          <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" />
+        </a>
+      <!-- Had to look up the JavaScript -->
+      <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+      </script>
+    </div>
+  </div>
+
+  {% endfor %}
+  </div>
+  <br>
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </ul>
+{% endblock %}

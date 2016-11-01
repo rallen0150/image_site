@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form class="" action="" method="post">
+      <p>
+        You are about to delete the Image: {{ object }}. Are you sure?
+      </p>
+      <input type="submit" name="" value="Yes">
+      <a href="{% url 'category_list_view' %}">No</a>
+      {% csrf_token %}
+  </form>
+{% endblock %}

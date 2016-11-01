@@ -1,24 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Hello</h1>
-    {% for image in object_list %}
-    <div class="">
+  <h1 class='title'>Imgur Lite</h1>
 
-        <img src="{{ MEDIA_URL}}{{ image.image_url }}" alt="Picture of {{ image.title }}" />
+    <div class="row">
+      {% for image in object_list %}
+      <div class="col-md-4">
+        <div class="">
+          <a href="{% url 'image_detail_view' image.id %}" data-toggle="tooltip" data-placement="right" title="{{ image.title}}, {{ image.description }}">
+            <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" />
+          </a>
 
+        <!-- Had to look up the JavaScript -->
+        <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
+      </div>
     </div>
-      <blockquote class="">
-          <b class='title'>{{ image.title }}</b>
-          <blockquote class="">
-              {{ image.description }}
-          </blockquote>
-      </blockquote>
-      {% if request.user == image.user %}
-        <a href="{% url 'image_update_view' image.id %}">Update</a>
-      {% endif %}
-      <hr>
+
     {% endfor %}
+    </div>
+    <br>
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
+    </ul>
 
 
 {% endblock %}

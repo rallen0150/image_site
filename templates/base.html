@@ -1,24 +1,59 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Image Site</title>
 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style media="screen">
       .title {
         text-decoration: underline;
+        text-align: center;
+        color:  #2F4F4F;
+      }
+      img {
+        height: 300px;
+        width: 325px;
+        padding-bottom: 10px;
+      }
+      body {
+        background-color: #DAA520;
+      }
+      a {
+        color: white;
+      }
+      .well {
+        background-color: #F5DEB3;
+      }
+      .update {
+        color: blue;
       }
     </style>
   </head>
   <body>
-    {% if not request.user.is_authenticated %}
-      <a href="{% url 'user_create_view' %}">New User</a>
-      <a href="{% url 'login' %}">Login</a>
-    {% else %}
-      <a href="{% url 'image_create_view' %}">Upload an Image</a>
-      <a href="{% url 'logout' %}?next={% url 'image_list_view' %}">Logout</a>
-    {% endif %}
     <div class="container">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a href="{% url 'category_list_view' %}">Imgur Lite</a>
+            </div>
+            <ul class="nav navbar-nav">
+            {% if not request.user.is_authenticated %}
+              <li><a href="{% url 'user_create_view' %}">New User</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+            {% else %}
+              <li><a href="{% url 'category_create_view' %}">Create a Category</a></li>
+              <li><a href="{% url 'logout' %}?next={% url 'index_view' %}">Logout</a></li>
+              <p class="navbar-text">Signed in as <a href="#" class="navbar-link"> {{ request.user }}</a></p>
+            {% endif %}
+            </ul>
+          </div>
+        </nav>
+
       {% block content %}
       {% endblock %}
     </div>

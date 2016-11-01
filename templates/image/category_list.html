@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="title">Categories</h1>
+
+
+  <h2><a href="{% url 'image_list_view'%}">All Images</a></h2>
+  {% for category in object_list %}
+    <h2><a href="{% url 'category_detail_view' category.id %}">{{ category }}</a></h2>
+  {% endfor %}
+
+{% endblock %}
