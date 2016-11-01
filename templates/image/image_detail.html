@@ -16,11 +16,13 @@
         Uploaded by: {{ image.user }}, {{ image.created_time|timesince }} ago
   </blockquote>
   <br> <br>
-  <form class="" action="{% url 'comment_create_view' object.id %}" method="post">
-      {% csrf_token %}
-      <input type="text" name="comment" value="" placeholder="Comment">
-      <input type="submit" name="" value="Comment">
-  </form>
+  {% if request.user.is_authenticated %}
+    <form class="" action="{% url 'comment_create_view' object.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment" value="" placeholder="Comment">
+        <input type="submit" name="" value="Comment">
+    </form>
+  {% endif %}
   <br>
   {% for comment in object.get_comment %}
     <div class="well well-sm">

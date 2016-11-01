@@ -20,6 +20,20 @@ class Image(models.Model):
     def get_comment(self):
         return Comment.objects.filter(comment_image=self)
 
+    @property
+    def next(self):
+        try:
+            return Image.objects.get(pk=self.pk+1)
+        except:
+            return None
+
+    @property
+    def previous(self):
+        try:
+            return Image.objects.get(pk=self.pk-1)
+        except:
+            return None
+
 class Comment(models.Model):
     comment = models.TextField()
     comment_created = models.DateTimeField(auto_now_add=True)
