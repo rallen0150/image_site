@@ -3,9 +3,9 @@
 {% block content %}
   {% if request.user.is_authenticated %}
     {% if request.user == object.user %}
-      <a href="{% url 'category_Update_view' object.id %}">Update Category</a> |
+    <span class="glyphicon glyphicon-pencil"></span> <a href="{% url 'category_Update_view' object.id %}">Update Category</a> |
     {% endif %}
-      <a href="{% url 'image_create_view' %}">Upload Image</a>
+      <span class="	glyphicon glyphicon-picture"></span> <a href="{% url 'image_create_view' %}">Upload Image</a>
       <h2 class="title">{{ object.title }}</h2>
   {% endif %}
 

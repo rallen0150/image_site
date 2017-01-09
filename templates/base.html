@@ -35,6 +35,12 @@
       #descrip {
         font-size: 24px;
       }
+      #user {
+        padding-left: 575px;
+      }
+      span {
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -51,7 +57,7 @@
             {% else %}
               <li><a href="{% url 'category_create_view' %}">Create a Category</a></li>
               <li><a href="{% url 'logout' %}?next={% url 'index_view' %}">Logout</a></li>
-              <p class="navbar-text">Signed in as <a href="#" class="navbar-link"> {{ request.user }}</a></p>
+              <p id="user" class="navbar-text">Signed in as {{ request.user }}</p>
             {% endif %}
             </ul>
           </div>
