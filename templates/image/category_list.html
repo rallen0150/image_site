@@ -4,9 +4,9 @@
   <h1 class="title">Categories</h1>
 
 
-  <h2><a href="{% url 'image_list_view'%}">All Images</a></h2>
+  <a href="{% url 'image_list_view'%}"><button type="button" class="btn btn-primary btn-block"><h2>All Images</h2></button></a><br><br>
   {% for category in object_list %}
-    <h2><a href="{% url 'category_detail_view' category.id %}">{{ category }}</a></h2>
+    <a href="{% url 'category_detail_view' category.id %}"><button type="button" class="btn btn-primary btn-block "><h2>{{ category }}</h2></button></a> <br><br>
   {% endfor %}
 
 {% endblock %}

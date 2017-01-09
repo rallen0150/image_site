@@ -9,35 +9,37 @@
     {% endif %}
   {% endif %}
   <br>
-  <h2 class='title'>{{ image.title }}</h2> <br>
-  <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" /> <br>
-  <blockquote cite="">
-        {{ image.description }}<br>
-        Uploaded by: {{ image.user }}, {{ image.created_time|timesince }} ago
-  </blockquote>
+  <div class="text-center">
+    <h2 class='title'>{{ image.title }}</h2> <br>
+
+    <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" /> <br>
+    <div>
+      <b id="descrip">{{ image.description }}</b><br>
+      Uploaded by: {{ image.user }}, {{ image.created_time|timesince }} ago
+    </div> <br><br>
+    {% if request.user.is_authenticated %}
+      <form class="" action="{% url 'comment_create_view' object.id %}" method="post">
+          {% csrf_token %}
+          <input type="text" name="comment" value="" placeholder="Comment">
+          <input type="submit" name="" value="Comment">
+      </form>
+    {% endif %}
+  </div>
   <br> <br>
-  {% if request.user.is_authenticated %}
-    <form class="" action="{% url 'comment_create_view' object.id %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="comment" value="" placeholder="Comment">
-        <input type="submit" name="" value="Comment">
-    </form>
-  {% endif %}
   <br>
   {% for comment in object.get_comment %}
     <div class="well well-sm">
-      <li>
+      <ul>
         <h4>{{ comment }}</h4>
-        {% if request.user == comment.user %}
-          <a class='update' href="{% url 'comment_update_view' comment.id %}">Update Comment</a> <br>
-          <a class='update' href="{% url 'comment_delete_view' comment.id %}">Delete</a>
-        {% endif %}
         <p>
           {{ comment.comment_created|timesince }} ago.
           Created By: {{ comment.user }} <br> <br>
+          {% if request.user == comment.user %}
+            <a class='update' href="{% url 'comment_update_view' comment.id %}">Update Comment</a> <br>
+            <a class='update' href="{% url 'comment_delete_view' comment.id %}">Delete</a>
+          {% endif %}
         </p>
-
-      </li>
+      </ul>
     </div>
   {% endfor %}
 {% endblock %}

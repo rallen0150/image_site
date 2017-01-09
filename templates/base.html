@@ -32,6 +32,9 @@
       .update {
         color: blue;
       }
+      #descrip {
+        font-size: 24px;
+      }
     </style>
   </head>
   <body>
@@ -39,7 +42,7 @@
         <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a href="{% url 'category_list_view' %}">Imgur Lite</a>
+              <a href="{% url 'category_list_view' %}"><h2>Imgur Lite</h2></a>
             </div>
             <ul class="nav navbar-nav">
             {% if not request.user.is_authenticated %}

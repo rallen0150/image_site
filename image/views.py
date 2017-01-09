@@ -71,6 +71,7 @@ class ImageDeleteView(DeleteView):
 
 class ImageDetailView(DetailView):
     model = Image
+    
 
 class CommentCreateView(CreateView):
     model = Comment

@@ -21,16 +21,16 @@ class Image(models.Model):
         return Comment.objects.filter(comment_image=self)
 
     @property
-    def next(self):
+    def get_next(self):
         try:
-            return Image.objects.get(pk=self.pk+1)
+            return Image.objects.get(id=self.pk+1)
         except:
             return None
 
     @property
-    def previous(self):
+    def get_previous(self):
         try:
-            return Image.objects.get(pk=self.pk-1)
+            return Image.objects.get(id=self.pk-1)
         except:
             return None
 

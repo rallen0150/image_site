@@ -13,10 +13,10 @@
     {% for image in object.get_recent %}
     <div class="col-md-4">
       <div class="">
-        <a href="{% url 'image_detail_view' image.id %}" data-toggle="tooltip" data-placement="right" title="{{ image.title}}, {{ image.description }}">
+        <a href="{% url 'image_detail_view' image.id %}" data-toggle="tooltip" data-placement="right" title="{{ image.title}}">
           <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" />
         </a>
-      <!-- Had to look up the JavaScript -->
+      <!-- Had to look up the JavaScript for info hovering over picture -->
       <script>
       $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip();
