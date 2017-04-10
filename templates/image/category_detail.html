@@ -9,6 +9,7 @@
       <h2 class="title">{{ object.title }}</h2>
   {% endif %}
 
+  {% comment %}
   <div class="row">
     {% for image in object.get_recent %}
     <div class="col-md-4">
@@ -16,15 +17,8 @@
         <a href="{% url 'image_detail_view' image.id %}" data-toggle="tooltip" data-placement="right" title="{{ image.title}}">
           <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" />
         </a>
-      <!-- Had to look up the JavaScript for info hovering over picture -->
-      <script>
-      $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();
-      });
-      </script>
     </div>
   </div>
-
   {% endfor %}
   </div>
   <br>
@@ -36,4 +30,39 @@
       <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
   </ul>
+  {% endcomment %}
+
+
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    {% for image in object.get_recent %}
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <a href="{% url 'image_detail_view' image.id %}">
+            <img src="{{ MEDIA_URL}}{{ image.image_url }}" class='rounded mx-auto d-block' alt="Picture of {{ image.title }}" />
+          </a>
+          <div class="carousel-caption">
+            <h3>{{ image.title }}</h3>
+            <p>{{ image.description }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+  </div>
+
+  <!-- Had to look up the JavaScript for info hovering over picture -->
+  <script>
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+  });
+  </script>
 {% endblock %}

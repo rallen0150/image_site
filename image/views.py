@@ -32,9 +32,6 @@ class CategoryCreateView(CreateView):
 
 class CategoryDetailView(DetailView):
     model = Category
-    # paginate_by = 9
-    # contact_list = Image.objects.all()
-    # paginator = Paginator(model, per_page=3) # Show 25 contacts per page
 
 class CategoryUpdateView(UpdateView):
     model = Category
@@ -71,7 +68,7 @@ class ImageDeleteView(DeleteView):
 
 class ImageDetailView(DetailView):
     model = Image
-    
+
 
 class CommentCreateView(CreateView):
     model = Comment
