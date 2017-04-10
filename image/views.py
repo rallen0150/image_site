@@ -19,7 +19,6 @@ class UserCreateView(CreateView):
 class CategoryListView(ListView):
     model = Category
 
-
 class CategoryCreateView(CreateView):
     model = Category
     fields = ('title', )
@@ -32,6 +31,7 @@ class CategoryCreateView(CreateView):
 
 class CategoryDetailView(DetailView):
     model = Category
+    paginate_by = 9
 
 class CategoryUpdateView(UpdateView):
     model = Category

@@ -9,7 +9,6 @@
       <h2 class="title">{{ object.title }}</h2>
   {% endif %}
 
-  {% comment %}
   <div class="row">
     {% for image in object.get_recent %}
     <div class="col-md-4">
@@ -30,9 +29,8 @@
       <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
   </ul>
-  {% endcomment %}
 
-
+{% comment %}
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     {% for image in object.get_recent %}
       <div class="carousel-inner" role="listbox">
@@ -56,13 +54,40 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-
   </div>
+  {% endcomment %}
 
   <!-- Had to look up the JavaScript for info hovering over picture -->
   <script>
   $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
   });
+
+  // $(document).ready(function(){
+  //     // Activate Carousel
+  //     $("#myCarousel").carousel();
+  //
+  //     // Enable Carousel Indicators
+  //     $(".item1").click(function(){
+  //         $("#myCarousel").carousel(0);
+  //     });
+  //     $(".item2").click(function(){
+  //         $("#myCarousel").carousel(1);
+  //     });
+  //     $(".item3").click(function(){
+  //         $("#myCarousel").carousel(2);
+  //     });
+  //     $(".item4").click(function(){
+  //         $("#myCarousel").carousel(3);
+  //     });
+  //
+  //     // Enable Carousel Controls
+  //     $(".left").click(function(){
+  //         $("#myCarousel").carousel("prev");
+  //     });
+  //     $(".right").click(function(){
+  //         $("#myCarousel").carousel("next");
+  //     });
+  // });
   </script>
 {% endblock %}
